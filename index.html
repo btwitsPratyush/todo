@@ -229,7 +229,6 @@
             font-size: 14px;
         }
 
-        /* Scrollbar styling */
         #taskList::-webkit-scrollbar {
             width: 6px;
         }
@@ -248,7 +247,6 @@
             background: #a8a8a8;
         }
 
-        /* Responsive design */
         @media (max-width: 480px) {
             .container {
                 padding: 20px;
@@ -290,18 +288,15 @@
     </div>
 
     <script>
-        // Get DOM elements
         const taskInput = document.getElementById('taskInput');
         const addBtn = document.getElementById('addBtn');
         const taskList = document.getElementById('taskList');
         const emptyState = document.getElementById('emptyState');
         const taskCounter = document.getElementById('taskCounter');
 
-        // Task array to store all tasks
         let tasks = [];
         let taskIdCounter = 1;
 
-        // Add event listeners
         addBtn.addEventListener('click', addTask);
         taskInput.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
@@ -309,7 +304,6 @@
             }
         });
 
-        // Function to add a new task
         function addTask() {
             const taskText = taskInput.value.trim();
             
@@ -318,7 +312,6 @@
                 return;
             }
 
-            // Create task object
             const task = {
                 id: taskIdCounter++,
                 text: taskText,
@@ -326,19 +319,15 @@
                 createdAt: new Date()
             };
 
-            // Add to tasks array
             tasks.push(task);
 
-            // Clear input
             taskInput.value = '';
             taskInput.focus();
 
-            // Update UI
             renderTasks();
             updateCounter();
         }
 
-        // Function to render all tasks
         function renderTasks() {
             taskList.innerHTML = '';
 
@@ -353,7 +342,6 @@
             });
         }
 
-        // Function to create a task element
         function createTaskElement(task) {
             const li = document.createElement('li');
             li.className = `task-item ${task.completed ? 'completed' : ''}`;
@@ -368,7 +356,6 @@
             return li;
         }
 
-        // Function to toggle task completion
         function toggleTask(taskId) {
             const task = tasks.find(t => t.id === taskId);
             if (task) {
@@ -378,7 +365,6 @@
             }
         }
 
-        // Function to delete a task
         function deleteTask(taskId) {
             const taskIndex = tasks.findIndex(t => t.id === taskId);
             if (taskIndex > -1) {
@@ -394,7 +380,6 @@
             }
         }
 
-        // Function to update task counter
         function updateCounter() {
             const totalTasks = tasks.length;
             const completedTasks = tasks.filter(t => t.completed).length;
@@ -409,14 +394,12 @@
             }
         }
 
-        // Utility function to escape HTML
         function escapeHtml(text) {
             const div = document.createElement('div');
             div.textContent = text;
             return div.innerHTML;
         }
 
-        // Add CSS animation for task deletion
         const style = document.createElement('style');
         style.textContent = `
             @keyframes taskSlideOut {
@@ -431,8 +414,7 @@
         `;
         document.head.appendChild(style);
 
-        // Initialize the app
-        updateCounter();
+       updateCounter();
         taskInput.focus();
     </script>
 </body>
